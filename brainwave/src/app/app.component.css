@@ -1,0 +1,13 @@
+.header{
+  position: fixed;
+  top:0px;
+  z-index: 100;
+}
+
+.main-container{
+  margin: 30px;
+}
+
+.desc{
+  margin-top:64px;
+}

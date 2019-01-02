@@ -1,0 +1,65 @@
+<div *ngIf="type=='latest'">
+  <mat-card matRipple fxLayout="row"
+    class="stockCard mat-title card-title" >
+    <span fxFlex="16%" >Symbol</span>
+    <span fxFlex="17%">High</span>
+    <span fxFlex="17%">Low</span>
+    <span fxFlex="17%">Open</span>
+    <span fxFlex="17%">Close</span>
+    <span fxFlex="16%">Change</span>
+  </mat-card>
+  <mat-card matRipple fxLayout="row"
+    *ngFor="let stock of stocksToDisplay"
+    class="stockCard"
+    (click)="goToStock(stock.symbol)">
+    <span fxFlex="16%">{{stock.symbol}}</span>
+    <span fxFlex="17%">{{stock.high}}</span>
+    <span fxFlex="17%">{{stock.low}}</span>
+    <span fxFlex="17%">{{stock.open}}</span>
+    <span fxFlex="17%">{{stock.close}}</span>
+    <span fxFlex="16%" [ngClass]="{'green':(stock.close - stock.open)>0,'red':(stock.close - stock.open)<0}">
+      <i class="material-icons" style="font-size: inherit" *ngIf="(stock.close - stock.open)>0">
+        expand_less
+      </i>
+      <i class="material-icons" style="font-size: inherit" *ngIf="(stock.close - stock.open)<0">
+        expand_more
+      </i>
+      {{(stock.close - stock.open).toFixed(2)}}
+    </span>
+  </mat-card>
+</div>
+<div *ngIf="type=='history'">
+    <mat-card fxLayout="row"
+      class="stockCard mat-title card-title" >
+      <span fxFlex="16%" >Date</span>
+      <span fxFlex="17%">High</span>
+      <span fxFlex="17%">Low</span>
+      <span fxFlex="17%">Open</span>
+      <span fxFlex="17%">Close</span>
+      <span fxFlex="16%">Change</span>
+    </mat-card>
+    <mat-card  fxLayout="row"
+      *ngFor="let stock of stocksToDisplay"
+      class="stockCard"
+      (click)="goToStock(stock.symbol)">
+      <span fxFlex="16%">{{stock.date.toDateString()}}</span>
+      <span fxFlex="17%">{{stock.high}}</span>
+      <span fxFlex="17%">{{stock.low}}</span>
+      <span fxFlex="17%">{{stock.open}}</span>
+      <span fxFlex="17%">{{stock.close}}</span>
+      <span fxFlex="16%" [ngClass]="{'green':(stock.close - stock.open)>0,'red':(stock.close - stock.open)<0}">
+        <i class="material-icons" style="font-size: inherit" *ngIf="(stock.close - stock.open)>0">
+          expand_less
+        </i>
+        <i class="material-icons" style="font-size: inherit" *ngIf="(stock.close - stock.open)<0">
+          expand_more
+        </i>
+        {{(stock.close - stock.open).toFixed(2)}}
+      </span>
+    </mat-card>
+</div>
+<mat-paginator *ngIf="length>10" [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="updatePage($event)">
+</mat-paginator>

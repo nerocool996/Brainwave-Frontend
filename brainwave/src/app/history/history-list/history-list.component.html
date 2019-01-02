@@ -1,0 +1,3 @@
+<div routerLink="/" matRipple  style="padding-top: 10px;display:inline"><mat-icon>arrow_back</mat-icon> </div>
+<h2 *ngIf="history[0]" style="display: inline"> {{history[0].symbol}}</h2><br><br>
+<app-stock-list [stocks] = "history" [type]="'history'">Loading</app-stock-list>

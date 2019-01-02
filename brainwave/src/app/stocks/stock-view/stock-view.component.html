@@ -1,0 +1,8 @@
+<h2 *ngIf="topStocks[0]">{{topStocks[0].date.toDateString()}}</h2>
+<h3>Best Performing</h3>
+<app-stock-list [stocks] = "topStocks" [type]="'latest'"></app-stock-list>
+<h3>Others</h3>
+<mat-form-field  class="example-container">
+    <input matInput placeholder="Search Stocks" style="color: #fff;" (input)="searchStock($event)">
+</mat-form-field>
+<app-stock-list [stocks] = "otherStocks" [type]="'latest'"></app-stock-list>
